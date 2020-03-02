@@ -1,0 +1,24 @@
+.center-flex {
+    display: flex;
+    justify-content: center;
+    padding: 15px 15px 0 15px;
+    .form-box {
+    	min-width: 300px;
+    	button {
+    		margin: 10px 0;
+    	}
+    }
+}
+
+.container {
+    margin: 0 auto;
+    padding: 15px 15px 0 15px;
+    max-width: 800px;
+    table {
+        width: 100%;
+        tr:hover {
+            background: rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+        }
+    }
+}

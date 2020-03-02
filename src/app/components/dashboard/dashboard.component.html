@@ -1,0 +1,32 @@
+
+<div class="center-flex" >
+  <mat-card class="form-box">
+    <form [formGroup]="Form">
+      <mat-form-field class="full-width" appearance="legacy">
+        <mat-label>Nazwa użytkownika GitHub</mat-label>
+        <input matInput placeholder="Podaj nazwę użytkownika" formControlName="username"  [(ngModel)]="username" required>
+        <mat-error *ngIf="Form.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <button [disabled]="!Form.valid" mat-raised-button (click)="sendRequest(this.username)">Sprawdź repozytoria</button>
+    </form>
+  </mat-card>
+</div>
+<div class="container" *ngIf="showTable">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Szukaj">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nazwa repozytorium </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="userName">
+      <th mat-header-cell *matHeaderCellDef> Nazwa użytkownika </th>
+      <td mat-cell *matCellDef="let element"> {{element.owner.login}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="goDetails(row.name)"></tr>
+  </table>
+</div>
